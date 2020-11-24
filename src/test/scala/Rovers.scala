@@ -22,11 +22,26 @@ class Rovers extends AnyFunSpec {
         rover.direction shouldEqual dir
       })
     }
+    it("should not move if the movement list is empty"){
+      var rover = rovers.Rover(Position(0, 0), North)
+      rover = move(rover, Nil)
+      rover.position shouldEqual Position(0,0)
+      rover.direction shouldEqual North
+    }
 
     it("should move forward the rover to each direction") {
       List((North, Position(0, 1)), (South, Position(0, -1)), (East, Position(1, 0)), (West, Position(-1, 0))).foreach(res => {
         var rover = rovers.Rover(Position(0, 0), res._1)
         rover = move(rover, List(Forward))
+        rover.position shouldEqual res._2
+        rover.direction shouldEqual res._1
+      })
+    }
+
+    it("should move backward the rover to each direction") {
+      List((North, Position(0, -1)), (South, Position(0, 1)), (East, Position(-1, 0)), (West, Position(1, 0))).foreach(res => {
+        var rover = rovers.Rover(Position(0, 0), res._1)
+        rover = move(rover, List(Backward))
         rover.position shouldEqual res._2
         rover.direction shouldEqual res._1
       })
