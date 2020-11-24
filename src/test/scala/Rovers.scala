@@ -4,62 +4,36 @@ import com.rovers._
 import com.rovers.Rover.move
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
-class Rovers extends AnyFunSpec{
+
+class Rovers extends AnyFunSpec {
   describe("Rovers") {
-    it("should be centered in 0,0 facing the north"){
-      val rover = Rover(Position(0,0), North)
-      rover.position shouldEqual Position(0,0)
-      rover.direction shouldEqual North
-    }
-    it("should be centered in 1,1 facing the south"){
-      val rover = rovers.Rover(Position(1,1), South)
-      rover.position shouldEqual Position(1,1)
-      rover.direction shouldEqual South
-    }
-    it("should be centered in 1,1 facing the east"){
-      val rover = rovers.Rover(Position(1,1), East)
-      rover.position shouldEqual Position(1,1)
-      rover.direction shouldEqual East
-    }
-    it("should be centered in 1,1 facing the west"){
-      val rover = rovers.Rover(Position(1,1), West)
-      rover.position shouldEqual Position(1,1)
-      rover.direction shouldEqual West
-    }
-    it("should move 1 the rover to the north") {
-      var rover =rovers.Rover(Position(0,0), North)
-      rover =  move(rover, List(Forward))
-      rover.position shouldEqual Position(0,1)
-      rover.direction shouldEqual North
-    }
-    it("should move 1 the rover to the south") {
-      var rover =rovers.Rover(Position(0,0), South)
-      rover =  move(rover, List(Forward))
-      rover.position shouldEqual Position(0,-1)
-      rover.direction shouldEqual South
+    it(s"should be centered in 0,0 facing the each direction") {
+      List(North, South, East, West).foreach(dir => {
+        val rover = Rover(Position(0, 0), dir)
+        rover.position shouldEqual Position(0, 0)
+        rover.direction shouldEqual dir
+      })
     }
 
-    it("should move 1 the rover to the south from 1,1") {
-      var rover =rovers.Rover(Position(1,1), South)
-      rover =  move(rover, List(Forward))
-      rover.position shouldEqual Position(1,0)
-      rover.direction shouldEqual South
+    it("should be centered in 1,1 facing the each direction") {
+      List(North, South, East, West).foreach(dir => {
+        val rover = Rover(Position(0, 0), dir)
+        rover.position shouldEqual Position(0, 0)
+        rover.direction shouldEqual dir
+      })
     }
 
-    it("should move 1 the rover to the east from 1,1") {
-      var rover =rovers.Rover(Position(1,1), East)
-      rover =  move(rover, List(Forward))
-      rover.position shouldEqual Position(2,1)
-      rover.direction shouldEqual East
+    it("should move forward the rover to each direction") {
+      List((North, Position(0, 1)), (South, Position(0, -1)), (East, Position(1, 0)), (West, Position(-1, 0))).foreach(res => {
+        var rover = rovers.Rover(Position(0, 0), res._1)
+        rover = move(rover, List(Forward))
+        rover.position shouldEqual res._2
+        rover.direction shouldEqual res._1
+      })
     }
 
-    it("should move 1 the rover to the west from 1,1") {
-      var rover =rovers.Rover(Position(1,1), West)
-      rover =  move(rover, List(Forward))
-      rover.position shouldEqual Position(0,1)
-      rover.direction shouldEqual West
-    }
   }
+
 }
 
 
