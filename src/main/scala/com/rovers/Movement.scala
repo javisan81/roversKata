@@ -1,4 +1,4 @@
 package com.rovers
 
-abstract sealed case class Movement()
+sealed trait Movement
 object Forward extends Movement
