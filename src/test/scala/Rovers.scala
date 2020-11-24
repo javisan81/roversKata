@@ -38,6 +38,13 @@ class Rovers extends AnyFunSpec{
       rover.position shouldEqual Position(0,-1)
       rover.direction shouldEqual South
     }
+
+    it("should move 1 the rover to the south from 1,1") {
+      var rover =rovers.Rover(Position(1,1), South)
+      rover =  move(rover, List(Forward))
+      rover.position shouldEqual Position(1,0)
+      rover.direction shouldEqual South
+    }
   }
 }
 
