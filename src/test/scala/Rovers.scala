@@ -17,8 +17,8 @@ class Rovers extends AnyFunSpec {
 
     it("should be centered in 1,1 facing the each direction") {
       List(North, South, East, West).foreach(dir => {
-        val rover = Rover(Position(0, 0), dir)
-        rover.position shouldEqual Position(0, 0)
+        val rover = Rover(Position(1, 1), dir)
+        rover.position shouldEqual Position(1, 1)
         rover.direction shouldEqual dir
       })
     }
