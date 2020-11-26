@@ -49,8 +49,35 @@ class Rover extends AnyFunSpec {
         })
     }
 
-  }
+    it("should move backward and forwared the rover to each direction") {
+      List(North, South, West, East)
+        .foreach(direction => {
+          var rover = rovers.Rover(Position(0, 0), direction)
+          rover = move(rover, List(Backward, Forward))
+          rover.position shouldEqual Position(0,0)
+          rover.direction shouldEqual direction
+        })
+    }
 
+    it("should move left the rover to each direction") {
+      List((North, Position(-1, 0)), (South, Position(1, 0)), (East, Position(0, 1)), (West, Position(0, -1)))
+        .foreach(res => {
+          var rover = rovers.Rover(Position(0, 0), res._1)
+          rover = move(rover, List(Left))
+          rover.position shouldEqual res._2
+          rover.direction shouldEqual res._1
+        })
+    }
+    it("should move right the rover to each direction") {
+      List((North, Position(1, 0)), (South, Position(-1, 0)), (East, Position(0, -1)), (West, Position(0, 1)))
+        .foreach(res => {
+          var rover = rovers.Rover(Position(0, 0), res._1)
+          rover = move(rover, List(Right))
+          rover.position shouldEqual res._2
+          rover.direction shouldEqual res._1
+        })
+    }
+  }
 }
 
 
