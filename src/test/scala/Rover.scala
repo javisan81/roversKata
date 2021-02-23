@@ -10,7 +10,7 @@ case class Rover(x: Int, y: Int, direction: Direction) {
     val firstCommand = commands(0)
     firstCommand match {
       case "f" => Rover(x, y + 1, North)
-      case "b" => Rover(0, -1, North)
+      case "b" => Rover(x, y - 1, North)
     }
   }
 }
@@ -37,6 +37,10 @@ class RoverTest extends AnyFunSpec {
       rover.move(Array("f")) shouldEqual Rover(1, 2, North)
     }
 
+    it("rover moves backward facing north starting in (1,1)") {
+      val rover = Rover(1, 1, North)
+      rover.move(Array("b")) shouldEqual Rover(1, 0, North)
+    }
 
   }
 }
